@@ -1,5 +1,5 @@
 export const renderTemplate = (data) => {
-  console.log(data);
+
   return `
     <a href="${data.largeImageURL}" class="item">
       <img src="${data.webformatURL}" alt="" alt="${data.tags}"/>
