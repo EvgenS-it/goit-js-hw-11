@@ -27,8 +27,12 @@ formEl.addEventListener('submit', (event) => {
     galleryEl.classList.add('is-load');
 
     fetchImages(inputValue)
-      .catch((error) => { console.log(error); })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then((data) => {
         galleryEl.classList.remove('is-load');
         const imagesHtml = [];
@@ -48,7 +52,8 @@ formEl.addEventListener('submit', (event) => {
           galleryEl.innerHTML = imagesHtml.join('');
           lightbox.refresh();
         }
-      });
+      })
+      .catch((error) => { console.log(error); });
 
     formEl.reset();
   }
