@@ -55,16 +55,13 @@ if (formEl) {
           }
         })
         .catch((error) => {
-          console.log(error);
-
           galleryEl.classList.remove('is-load');
           iziToast.error({
-              message: 'Sorry, something went wrong! Please, check your internet connection.',
+              message: `Sorry, something went wrong! ${error.message}`,
               position: 'topRight',
               class: 'error',
               color: 'red',
           });
-
         });
 
       formEl.reset();
