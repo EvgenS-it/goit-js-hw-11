@@ -5,15 +5,40 @@ const API = {
   },
 };
 
+// export const fetchImages = async (searchQuery, page) => {
+
+//   const params = new URLSearchParams({
+//     key: API.PIXABAY.KEY,
+//     q: searchQuery,
+//     image_type: 'photo',
+//     orientation: 'horizontal',
+//     safesearch: true,
+//   });
+
+//   return fetch(API.PIXABAY.PATH + '?' + params.toString());
+// };
+
+
+//==================================
+
 export const fetchImages = async (searchQuery, page) => {
+  try {
+    const params = new URLSearchParams({
+      key: API.PIXABAY.KEY,
+      q: searchQuery,
+      image_type: 'photo',
+      orientation: 'horizontal',
+      safesearch: true,
+    });
 
-  const params = new URLSearchParams({
-    key: API.PIXABAY.KEY,
-    q: searchQuery,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-  });
+    const response = await fetch(API.PIXABAY.PATH + '?' + params.toString());
+    if (!response.ok) {
+      throw new Error('Failed to fetch images');
+    }
 
-  return fetch(API.PIXABAY.PATH + '?' + params.toString());
+    return response;
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    throw error;
+  }
 };
