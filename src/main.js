@@ -28,12 +28,6 @@ if (formEl) {
       galleryEl.classList.add('is-load');
 
       fetchImages(inputValue)
-        .then((response) => {
-          // if (!response.ok) {
-          //   throw new Error(response.status);
-          // }
-          return response.json();
-        })
         .then((data) => {
           galleryEl.classList.remove('is-load');
           const imagesHtml = [];
